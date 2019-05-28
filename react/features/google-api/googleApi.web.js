@@ -8,6 +8,9 @@ import {
 
 const GOOGLE_API_CLIENT_LIBRARY_URL = 'https://apis.google.com/js/api.js';
 
+/* @flow */
+declare var config: Object;
+
 /**
  * A promise for dynamically loading the Google API Client Library.
  *
@@ -282,22 +285,32 @@ const googleApi = {
 
                 // no result, maybe not signed in
                 if (!calendarList) {
+
                     return Promise.resolve();
                 }
 
-                const calendarIds
-                    = calendarList.result.items.map(en => {
-                        return {
-                            id: en.id,
-                            accessRole: en.accessRole
-                        };
-                    });
-                const promises = calendarIds.map(({ id, accessRole }) => {
+                const calendarIds = calendarList.result.items.map(en => {
+                    console.log(en);
+
+                    return {
+                        id: en.id,
+                        accessRole: en.accessRole
+                    };
+                });
+
+                console.log(config);
+                let filteredCalendarIds = calendarIds;
+
+                if (config.googleRoomCalendarResource && config.googleRoomCalendarResource !== '') {
+                    filteredCalendarIds = calendarIds.filter(cal => cal.id === config.googleRoomCalendarResource);
+                }
+                const promises = filteredCalendarIds.map(({ id, accessRole }) => {
                     const startDate = new Date();
                     const endDate = new Date();
 
                     startDate.setDate(startDate.getDate() + fetchStartDays);
                     endDate.setDate(endDate.getDate() + fetchEndDays);
+                    console.log(id);
 
                     // retrieve the events and adds to the result the calendarId
                     return this._getGoogleApiClient()
@@ -319,6 +332,7 @@ const googleApi = {
                                     || accessRole === 'owner') {
                                     resultItem.calendarId = id;
                                 }
+                                console.log(resultItem);
 
                                 return resultItem;
                             }));

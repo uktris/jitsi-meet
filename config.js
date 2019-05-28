@@ -279,7 +279,10 @@ var config = {
 
     // Enables calendar integration, depends on googleApiApplicationClientID
     // and microsoftApiApplicationClientID
-    // enableCalendarIntegration: false,
+    googleApiApplicationClientID: '1065884685439-uthf087s3oo2uvcdkaosnphaq8ier9lb.apps.googleusercontent.com',
+    microsoftApiApplicationClientID: '00000000-0000-0000-0000-000040240063',
+    enableCalendarIntegration: true,
+    googleRoomCalendarResource: 'trafficjunction.co.uk_33363838333831353136@resource.calendar.google.com',
 
     // Stats
     //
