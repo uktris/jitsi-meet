@@ -24,6 +24,7 @@ const DEFAULT_STATE = {
     avatarURL: undefined,
     cameraDeviceId: undefined,
     displayName: undefined,
+    calendarResource: undefined,
     email: undefined,
     localFlipX: true,
     micDeviceId: undefined,
@@ -123,6 +124,7 @@ function _initSettings(featureState) {
     // avoid garbage in the source.
     const displayName = _.escape(window.localStorage.getItem('displayname'));
     const email = _.escape(window.localStorage.getItem('email'));
+    const calendarResource = _.escape(window.localStorage.getItem('calendarResource'));
     let avatarID = _.escape(window.localStorage.getItem('avatarId'));
 
     if (!avatarID) {
@@ -133,7 +135,8 @@ function _initSettings(featureState) {
     settings = assignIfDefined({
         avatarID,
         displayName,
-        email
+        email,
+        calendarResource
     }, settings);
 
     if (!browser.isReactNative()) {

@@ -550,6 +550,7 @@
             "signedIn": "Currently accessing calendar events for __email__. Click the Disconnect button below to stop accessing calendar events.",
             "title": "Calendar"
         },
+        "calendarResource": "Calendar Resource",
         "cameraAndMic": "Camera and microphone",
         "devices": "Devices",
         "followMe": "Everyone follows me",

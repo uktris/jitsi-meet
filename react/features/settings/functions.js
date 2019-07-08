@@ -81,6 +81,9 @@ export function getMoreTabProps(stateful: Object | Function) {
         startAudioMutedPolicy,
         startVideoMutedPolicy
     } = state['features/base/conference'];
+    const {
+        calendarResource
+    } = state['features/base/settings'];
     const followMeActive = Boolean(state['features/follow-me'].moderator);
     const configuredTabs = interfaceConfig.SETTINGS_SECTIONS || [];
     const localParticipant = getLocalParticipant(state);
@@ -100,7 +103,8 @@ export function getMoreTabProps(stateful: Object | Function) {
         showLanguageSettings: configuredTabs.includes('language'),
         showModeratorSettings,
         startAudioMuted: Boolean(conference && startAudioMutedPolicy),
-        startVideoMuted: Boolean(conference && startVideoMutedPolicy)
+        startVideoMuted: Boolean(conference && startVideoMutedPolicy),
+        calendarResource
     };
 }
 

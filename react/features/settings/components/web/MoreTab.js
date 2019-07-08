@@ -5,6 +5,7 @@ import DropdownMenu, {
     DropdownItem,
     DropdownItemGroup
 } from '@atlaskit/dropdown-menu';
+import { FieldTextStateless } from '@atlaskit/field-text';
 import React from 'react';
 
 import { AbstractDialogTab } from '../../../base/dialog';
@@ -63,7 +64,13 @@ export type Props = {
     /**
      * Invoked to obtain translated strings.
      */
-    t: Function
+    t: Function,
+
+    /**
+     * Invoked to obtain translated strings.
+     */
+    calendarResource: string
+
 };
 
 /**
@@ -145,6 +152,7 @@ class MoreTab extends AbstractDialogTab<Props, State> {
         const {
             currentLanguage,
             languages,
+            calendarResource,
             t
         } = this.props;
 
@@ -182,6 +190,20 @@ class MoreTab extends AbstractDialogTab<Props, State> {
                         { languageItems }
                     </DropdownItemGroup>
                 </DropdownMenu>
+                <FieldTextStateless
+                    autoFocus = { true }
+                    compact = { true }
+                    id = 'setCalendarResource'
+                    label = { t('settings.calendarResource') }
+                    // eslint-disable-next-line react/jsx-no-bind
+                    onChange = {
+                        ({ target: { value } }) =>
+                            super._onChange({ calendarResource: value })
+                    }
+                    placeholder = { t('settings.calendarResource') }
+                    shouldFitContainer = { true }
+                    type = 'text'
+                    value = { calendarResource } />
             </div>
         );
     }
